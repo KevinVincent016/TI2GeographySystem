@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.ArrayList;
+
 public class Country {
 
     private String id;
@@ -7,7 +9,10 @@ public class Country {
     private double population;
     private String countryCode;
 
+    private ArrayList<City> cities;
+
     public Country(String id, String name, double population, String countryCode) {
+        cities = new ArrayList<>();
         this.id = id;
         this.name = name;
         this.population = population;
@@ -44,5 +49,13 @@ public class Country {
 
     public void setCountryCode(String countryCode) {
         this.countryCode = countryCode;
+    }
+
+    public ArrayList<City> getCountries(){
+        return cities;
+    }
+
+    public void addCity(City city){
+        cities.add(city);
     }
 }

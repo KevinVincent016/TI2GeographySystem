@@ -1,6 +1,8 @@
 package UI;
 
 import java.util.Scanner;
+
+import Exceptions.NoneExistentCommand;
 import Model.Controller;
 
 public class Main {
@@ -40,9 +42,8 @@ public class Main {
                         controller.delete(command);
                         break;
                     }else{
-                        System.out.println("THERE'S NO COMMAND LIKE THIS");
+                        throw new NoneExistentCommand();
                     }
-                    break;
                 case 2:
 
                     break;
