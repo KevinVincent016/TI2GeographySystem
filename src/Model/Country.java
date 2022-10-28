@@ -51,7 +51,7 @@ public class Country {
         this.countryCode = countryCode;
     }
 
-    public ArrayList<City> getCountries(){
+    public ArrayList<City> getCities(){
         return cities;
     }
 

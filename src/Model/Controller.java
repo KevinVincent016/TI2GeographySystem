@@ -69,8 +69,137 @@ public class Controller {
         }
     }
 
-    public void searchUndFilter(String command){
-        System.out.println("Filter");
+    public void searchUndFilter(String command) throws NoneExistentCommand{
+        if (command.contains("WHERE")){
+            String[] splitCommand = command.split(" ");
+            if (splitCommand[3].equals("countries")){
+                switch (splitCommand[5]) {
+                    case "name":
+                        String name = splitCommand[7];
+                        if (name.contains("'")){
+                            name = name.replace("'","");
+                        }else{
+                            throw new NoneExistentCommand();
+                        }
+                        for (int i = 0; i < countries.size(); i++) {
+                            if (countries.get(i).getName().equals(name)){
+                                System.out.println("Country " + name + " is registered");
+                                break;
+                            }
+                        }
+                        break;
+                    case "population":
+                        double population = Double.parseDouble(splitCommand[7]);
+                        switch (splitCommand[6]){
+                            case ">":
+                                for (int i = 0; i < countries.size(); i++) {
+                                    if (countries.get(i).getPopulation()>population){
+                                        System.out.println(countries.get(i).getName());
+                                    }
+                                }
+                                break;
+                            case "<":
+                                for (int i = 0; i < countries.size(); i++) {
+                                    if (countries.get(i).getPopulation()<population){
+                                        System.out.println(countries.get(i).getName());
+                                    }
+                                }
+                                break;
+                            case "=":
+                                for (int i = 0; i < countries.size(); i++) {
+                                    if (countries.get(i).getPopulation()==population){
+                                        System.out.println(countries.get(i).getName());
+                                    }
+                                }
+                                break;
+                            default:
+                                throw new NoneExistentCommand();
+                        }
+                        break;
+                }
+            } else if (splitCommand[3].equals("cities")) {
+                switch (splitCommand[5]) {
+                    case "name":
+                        String name = splitCommand[7];
+                        if (name.contains("'")){
+                            name = name.replace("'","");
+                        }else{
+                            throw new NoneExistentCommand();
+                        }
+                        for (int i = 0; i < countries.get(i).getCities().size(); i++) {
+                            if (countries.get(i).getCities().get(i)==null){
+                                throw new NoCitiesRegistered();
+                            }else {
+                                if (countries.get(i).getCities().get(i).getName().equals(name)) {
+                                    System.out.println("City " + name + " is registered");
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    case "population":
+                        double population = Double.parseDouble(splitCommand[7]);
+                        switch (splitCommand[6]){
+                            case ">":
+                                for (int i = 0; i < countries.size(); i++) {
+                                    for (int j = 0; j < countries.get(i).getCities().size(); j++) {
+                                        if (countries.get(i).getCities().get(j) == null) {
+                                            throw new NoCitiesRegistered();
+                                        } else {
+                                            if (countries.get(i).getCities().get(j).getPopulation() > population) {
+                                                System.out.println(countries.get(i).getCities().get(j).getName());
+                                            }
+                                        }
+                                    }
+                                }
+                                break;
+                            case "<":
+                                for (int i = 0; i < countries.size(); i++) {
+                                    for (int j = 0; j < countries.get(i).getCities().size(); j++) {
+                                        if (countries.get(i).getCities().get(j) == null) {
+                                            throw new NoCitiesRegistered();
+                                        } else {
+                                            if (countries.get(i).getCities().get(j).getPopulation() < population) {
+                                                System.out.println(countries.get(i).getCities().get(j).getName());
+                                            }
+                                        }
+                                    }
+                                }
+                                break;
+                            case "=":
+                                for (int i = 0; i < countries.size(); i++) {
+                                    for (int j = 0; j < countries.get(i).getCities().size();j++) {
+                                        if (countries.get(i).getCities().get(j) == null) {
+                                            throw new NoCitiesRegistered();
+                                        } else {
+                                            if (countries.get(i).getCities().get(j).getPopulation() == population) {
+                                                System.out.println(countries.get(i).getCities().get(j).getName());
+                                            }
+                                        }
+                                    }
+                                }
+                                break;
+                            default:
+                                throw new NoneExistentCommand();
+                        }
+                        break;
+                }
+            }else{
+                throw new NoneExistentCommand();
+            }
+        }else{
+            if (command.contains("countries")){
+                for (int i = 0; i < countries.size(); i++) {
+                    System.out.println(countries.get(i).getName());
+                }
+            } else if (command.contains("cities")) {
+                for (int i = 0; i < countries.size(); i++) {
+                    for (int j = 0; j < countries.get(i).getCities().size(); j++){
+                        System.out.println(countries.get(i).getCities().get(j).getName());
+                    }
+                }
+            }
+        }
     }
 
     public void orderBy(String command){
