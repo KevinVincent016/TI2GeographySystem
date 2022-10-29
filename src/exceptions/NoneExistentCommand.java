@@ -1,6 +1,6 @@
-package Exceptions;
+package exceptions;
 
-public class NoneExistentCommand extends RuntimeException{
+public class NoneExistentCommand extends Exception{
     public NoneExistentCommand(){
         super("the indicated command does not exist");
     }
