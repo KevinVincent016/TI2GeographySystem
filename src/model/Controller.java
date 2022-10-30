@@ -4,7 +4,7 @@ import exceptions.NoCitiesRegistered;
 import exceptions.NoneExistingCountry;
 import exceptions.NoneExistentCommand;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class Controller {
@@ -206,8 +206,6 @@ public class Controller {
     }
 
     public void orderBy(String command) throws NoneExistentCommand, NoCitiesRegistered {
-        System.out.println("Order");
-
         if (command.contains("WHERE")) {
             String[] splitCommand = command.split(" ");
             if (splitCommand[3].equals("countries")) {
@@ -221,45 +219,110 @@ public class Controller {
                         }
                         for (int i = 0; i < countries.size(); i++) {
                             if (countries.get(i).getName().equals(name)) {
-                                System.out.println("Country " + name + " is registered");
+                                System.out.println(countries.get(i).getName() + ", " + countries.get(i).getPopulation() + ", " +countries.get(i).getId() + ", " +countries.get(i).getCountryCode());
                                 break;
                             }
                         }
-
                         break;
                     case "population":
                         double population = Double.parseDouble(splitCommand[7]);
                         switch (splitCommand[6]) {
                             case ">":
-                                for (int i = 0; i < countries.size(); i++) {
-                                    if (countries.get(i).getPopulation() > population) {
-                                        System.out.println(countries.get(i).getName());
+                                if (splitCommand[10].equals("name")) {
+                                    countries.sort(Comparator.comparing(Country::getName));
+                                    for (int i = 0; i < countries.size(); i++) {
+                                        if (countries.get(i).getPopulation() > population) {
+                                            System.out.println(countries.get(i).getName() + ", " + countries.get(i).getPopulation() + ", " +countries.get(i).getId() + ", " +countries.get(i).getCountryCode());
+                                        }
+                                    }
+                                } else if (splitCommand[10].equals("population")) {
+                                    countries.sort(Comparator.comparingDouble(Country::getPopulation));
+                                    for (int i = 0; i < countries.size(); i++) {
+                                        if (countries.get(i).getPopulation() > population) {
+                                            System.out.println(countries.get(i).getName() + ", " + countries.get(i).getPopulation() + ", " +countries.get(i).getId() + ", " +countries.get(i).getCountryCode());
+                                        }
+                                    }
+                                } else if (splitCommand[10].equals("id")) {
+                                    countries.sort(Comparator.comparing(Country::getId));
+                                    for (int i = 0; i < countries.size(); i++) {
+                                        if (countries.get(i).getPopulation() > population) {
+                                            System.out.println(countries.get(i).getName() + ", " + countries.get(i).getPopulation() + ", " +countries.get(i).getId() + ", " +countries.get(i).getCountryCode());
+                                        }
+                                    }
+                                } else if (splitCommand[10].equals("countrycode")) {
+                                    countries.sort(Comparator.comparing(Country::getCountryCode));
+                                    for (int i = 0; i < countries.size(); i++) {
+                                        if (countries.get(i).getPopulation() > population) {
+                                            System.out.println(countries.get(i).getName() + ", " + countries.get(i).getPopulation() + ", " +countries.get(i).getId() + ", " +countries.get(i).getCountryCode());
+                                        }
                                     }
                                 }
                                 break;
                             case "<":
-                                for (int i = 0; i < countries.size(); i++) {
-                                    if (countries.get(i).getPopulation() < population) {
-                                        System.out.println(countries.get(i).getName());
+                                if (splitCommand[10].equals("name")) {
+                                    countries.sort(Comparator.comparing(Country::getName));
+                                    for (int i = 0; i < countries.size(); i++) {
+                                        if (countries.get(i).getPopulation() < population) {
+                                            System.out.println(countries.get(i).getName() + ", " + countries.get(i).getPopulation() + ", " +countries.get(i).getId() + ", " +countries.get(i).getCountryCode());
+                                        }
+                                    }
+                                } else if (splitCommand[10].equals("population")) {
+                                    countries.sort(Comparator.comparingDouble(Country::getPopulation));
+                                    for (int i = 0; i < countries.size(); i++) {
+                                        if (countries.get(i).getPopulation() < population) {
+                                            System.out.println(countries.get(i).getName() + ", " + countries.get(i).getPopulation() + ", " +countries.get(i).getId() + ", " +countries.get(i).getCountryCode());
+                                        }
+                                    }
+                                } else if (splitCommand[10].equals("id")) {
+                                    countries.sort(Comparator.comparing(Country::getId));
+                                    for (int i = 0; i < countries.size(); i++) {
+                                        if (countries.get(i).getPopulation() < population) {
+                                            System.out.println(countries.get(i).getName() + ", " + countries.get(i).getPopulation() + ", " +countries.get(i).getId() + ", " +countries.get(i).getCountryCode());
+                                        }
+                                    }
+                                } else if (splitCommand[10].equals("countrycode")) {
+                                    countries.sort(Comparator.comparing(Country::getCountryCode));
+                                    for (int i = 0; i < countries.size(); i++) {
+                                        if (countries.get(i).getPopulation() < population) {
+                                            System.out.println(countries.get(i).getName() + ", " + countries.get(i).getPopulation() + ", " +countries.get(i).getId() + ", " +countries.get(i).getCountryCode());
+                                        }
                                     }
                                 }
                                 break;
                             case "=":
-                                for (int i = 0; i < countries.size(); i++) {
-                                    if (countries.get(i).getPopulation() == population) {
-                                        System.out.println(countries.get(i).getName());
+                                if (splitCommand[10].equals("name")) {
+                                    countries.sort(Comparator.comparing(Country::getName));
+                                    for (int i = 0; i < countries.size(); i++) {
+                                        if (countries.get(i).getPopulation() == population) {
+                                            System.out.println(countries.get(i).getName() + ", " + countries.get(i).getPopulation() + ", " +countries.get(i).getId() + ", " +countries.get(i).getCountryCode());
+                                        }
+                                    }
+                                } else if (splitCommand[10].equals("population")) {
+                                    countries.sort(Comparator.comparingDouble(Country::getPopulation));
+                                    for (int i = 0; i < countries.size(); i++) {
+                                        if (countries.get(i).getPopulation() == population) {
+                                            System.out.println(countries.get(i).getName() + ", " + countries.get(i).getPopulation() + ", " +countries.get(i).getId() + ", " +countries.get(i).getCountryCode());
+                                        }
+                                    }
+                                } else if (splitCommand[10].equals("id")) {
+                                    countries.sort(Comparator.comparing(Country::getId));
+                                    for (int i = 0; i < countries.size(); i++) {
+                                        if (countries.get(i).getPopulation() == population) {
+                                            System.out.println(countries.get(i).getName() + ", " + countries.get(i).getPopulation() + ", " +countries.get(i).getId() + ", " +countries.get(i).getCountryCode());
+                                        }
+                                    }
+                                } else if (splitCommand[10].equals("countrycode")) {
+                                    countries.sort(Comparator.comparing(Country::getCountryCode));
+                                    for (int i = 0; i < countries.size(); i++) {
+                                        if (countries.get(i).getPopulation() == population) {
+                                            System.out.println(countries.get(i).getName() + ", " + countries.get(i).getPopulation() + ", " +countries.get(i).getId() + ", " +countries.get(i).getCountryCode());
+                                        }
                                     }
                                 }
                                 break;
                             default:
                                 throw new NoneExistentCommand();
                         }
-
-                        //Collections.sort(countries, (o1, o2) -> {
-                        //    return o1.getName().compareTo(o2.getName())
-                        //});
-
-                        break;
                 }
             } else if (splitCommand[3].equals("cities")) {
                 switch (splitCommand[5]) {
@@ -275,7 +338,9 @@ public class Controller {
                                 throw new NoCitiesRegistered();
                             } else {
                                 if (countries.get(i).getCities().get(i).getName().equals(name)) {
-                                    System.out.println("City " + name + " is registered");
+                                    for (City city : countries.get(i).getCities()) {
+                                        System.out.println(city.getName() + ", " + city.getPopulation() + ", " + city.getId() + ", " + city.getCountryID());
+                                    }
                                     break;
                                 }
                             }
@@ -285,39 +350,165 @@ public class Controller {
                         double population = Double.parseDouble(splitCommand[7]);
                         switch (splitCommand[6]) {
                             case ">":
-                                for (int i = 0; i < countries.size(); i++) {
-                                    for (int j = 0; j < countries.get(i).getCities().size(); j++) {
-                                        if (countries.get(i).getCities().get(j) == null) {
-                                            throw new NoCitiesRegistered();
-                                        } else {
-                                            if (countries.get(i).getCities().get(j).getPopulation() > population) {
-                                                System.out.println(countries.get(i).getCities().get(j).getName());
+                                if (splitCommand[10].equals("name")) {
+                                    for (int i = 0; i < countries.size(); i++) {
+                                        for (int j = 0; j < countries.get(i).getCities().size(); j++) {
+                                            if (countries.get(i).getCities().get(j) == null) {
+                                                throw new NoCitiesRegistered();
+                                            } else {
+                                                countries.get(i).getCities().sort(Comparator.comparing(City::getName));
+                                                if (countries.get(i).getCities().get(j).getPopulation() > population) {
+                                                    System.out.println(countries.get(i).getCities().get(j).getName() + ", " + countries.get(i).getCities().get(j).getPopulation() + ", " + countries.get(i).getCities().get(j).getId() + ", " + countries.get(i).getCities().get(j).getCountryID());
+                                                }
+                                            }
+                                        }
+                                    }
+                                } else if (splitCommand[10].equals("population")) {
+                                    for (int i = 0; i < countries.size(); i++) {
+                                        for (int j = 0; j < countries.get(i).getCities().size(); j++) {
+                                            if (countries.get(i).getCities().get(j) == null) {
+                                                throw new NoCitiesRegistered();
+                                            } else {
+                                                countries.get(i).getCities().sort(Comparator.comparingDouble(City::getPopulation));
+                                                if (countries.get(i).getCities().get(j).getPopulation() > population) {
+                                                    System.out.println(countries.get(i).getCities().get(j).getName() + ", " + countries.get(i).getCities().get(j).getPopulation() + ", " + countries.get(i).getCities().get(j).getId() + ", " + countries.get(i).getCities().get(j).getCountryID());
+                                                }
+                                            }
+                                        }
+                                    }
+                                } else if (splitCommand[10].equals("id")) {
+                                    for (int i = 0; i < countries.size(); i++) {
+                                        for (int j = 0; j < countries.get(i).getCities().size(); j++) {
+                                            if (countries.get(i).getCities().get(j) == null) {
+                                                throw new NoCitiesRegistered();
+                                            } else {
+                                                countries.get(i).getCities().sort(Comparator.comparing(City::getId));
+                                                if (countries.get(i).getCities().get(j).getPopulation() > population) {
+                                                    System.out.println(countries.get(i).getCities().get(j).getName() + ", " + countries.get(i).getCities().get(j).getPopulation() + ", " + countries.get(i).getCities().get(j).getId() + ", " + countries.get(i).getCities().get(j).getCountryID());
+                                                }
+                                            }
+                                        }
+                                    }
+                                } else if (splitCommand[10].equals("countrycode")) {
+                                    for (int i = 0; i < countries.size(); i++) {
+                                        for (int j = 0; j < countries.get(i).getCities().size(); j++) {
+                                            if (countries.get(i).getCities().get(j) == null) {
+                                                throw new NoCitiesRegistered();
+                                            } else {
+                                                countries.get(i).getCities().sort(Comparator.comparing(City::getCountryID));
+                                                if (countries.get(i).getCities().get(j).getPopulation() > population) {
+                                                    System.out.println(countries.get(i).getCities().get(j).getName() + ", " + countries.get(i).getCities().get(j).getPopulation() + ", " + countries.get(i).getCities().get(j).getId() + ", " + countries.get(i).getCities().get(j).getCountryID());
+                                                }
                                             }
                                         }
                                     }
                                 }
                                 break;
                             case "<":
-                                for (int i = 0; i < countries.size(); i++) {
-                                    for (int j = 0; j < countries.get(i).getCities().size(); j++) {
-                                        if (countries.get(i).getCities().get(j) == null) {
-                                            throw new NoCitiesRegistered();
-                                        } else {
-                                            if (countries.get(i).getCities().get(j).getPopulation() < population) {
-                                                System.out.println(countries.get(i).getCities().get(j).getName());
+                                if (splitCommand[10].equals("name")) {
+                                    for (int i = 0; i < countries.size(); i++) {
+                                        for (int j = 0; j < countries.get(i).getCities().size(); j++) {
+                                            if (countries.get(i).getCities().get(j) == null) {
+                                                throw new NoCitiesRegistered();
+                                            } else {
+                                                countries.get(i).getCities().sort(Comparator.comparing(City::getName));
+                                                if (countries.get(i).getCities().get(j).getPopulation() < population) {
+                                                    System.out.println(countries.get(i).getCities().get(j).getName() + ", " + countries.get(i).getCities().get(j).getPopulation() + ", " + countries.get(i).getCities().get(j).getId() + ", " + countries.get(i).getCities().get(j).getCountryID());
+                                                }
+                                            }
+                                        }
+                                    }
+                                } else if (splitCommand[10].equals("population")) {
+                                    for (int i = 0; i < countries.size(); i++) {
+                                        for (int j = 0; j < countries.get(i).getCities().size(); j++) {
+                                            if (countries.get(i).getCities().get(j) == null) {
+                                                throw new NoCitiesRegistered();
+                                            } else {
+                                                countries.get(i).getCities().sort(Comparator.comparingDouble(City::getPopulation));
+                                                if (countries.get(i).getCities().get(j).getPopulation() < population) {
+                                                    System.out.println(countries.get(i).getCities().get(j).getName() + ", " + countries.get(i).getCities().get(j).getPopulation() + ", " + countries.get(i).getCities().get(j).getId() + ", " + countries.get(i).getCities().get(j).getCountryID());
+                                                }
+                                            }
+                                        }
+                                    }
+                                } else if (splitCommand[10].equals("id")) {
+                                    for (int i = 0; i < countries.size(); i++) {
+                                        for (int j = 0; j < countries.get(i).getCities().size(); j++) {
+                                            if (countries.get(i).getCities().get(j) == null) {
+                                                throw new NoCitiesRegistered();
+                                            } else {
+                                                countries.get(i).getCities().sort(Comparator.comparing(City::getId));
+                                                if (countries.get(i).getCities().get(j).getPopulation() < population) {
+                                                    System.out.println(countries.get(i).getCities().get(j).getName() + ", " + countries.get(i).getCities().get(j).getPopulation() + ", " + countries.get(i).getCities().get(j).getId() + ", " + countries.get(i).getCities().get(j).getCountryID());
+                                                }
+                                            }
+                                        }
+                                    }
+                                } else if (splitCommand[10].equals("countrycode")) {
+                                    for (int i = 0; i < countries.size(); i++) {
+                                        for (int j = 0; j < countries.get(i).getCities().size(); j++) {
+                                            if (countries.get(i).getCities().get(j) == null) {
+                                                throw new NoCitiesRegistered();
+                                            } else {
+                                                countries.get(i).getCities().sort(Comparator.comparing(City::getCountryID));
+                                                if (countries.get(i).getCities().get(j).getPopulation() < population) {
+                                                    System.out.println(countries.get(i).getCities().get(j).getName() + ", " + countries.get(i).getCities().get(j).getPopulation() + ", " + countries.get(i).getCities().get(j).getId() + ", " + countries.get(i).getCities().get(j).getCountryID());
+                                                }
                                             }
                                         }
                                     }
                                 }
                                 break;
                             case "=":
-                                for (int i = 0; i < countries.size(); i++) {
-                                    for (int j = 0; j < countries.get(i).getCities().size(); j++) {
-                                        if (countries.get(i).getCities().get(j) == null) {
-                                            throw new NoCitiesRegistered();
-                                        } else {
-                                            if (countries.get(i).getCities().get(j).getPopulation() == population) {
-                                                System.out.println(countries.get(i).getCities().get(j).getName());
+                                if (splitCommand[10].equals("name")) {
+                                    for (int i = 0; i < countries.size(); i++) {
+                                        for (int j = 0; j < countries.get(i).getCities().size(); j++) {
+                                            if (countries.get(i).getCities().get(j) == null) {
+                                                throw new NoCitiesRegistered();
+                                            } else {
+                                                countries.get(i).getCities().sort(Comparator.comparing(City::getName));
+                                                if (countries.get(i).getCities().get(j).getPopulation() == population) {
+                                                    System.out.println(countries.get(i).getCities().get(j).getName() + ", " + countries.get(i).getCities().get(j).getPopulation() + ", " + countries.get(i).getCities().get(j).getId() + ", " + countries.get(i).getCities().get(j).getCountryID());
+                                                }
+                                            }
+                                        }
+                                    }
+                                } else if (splitCommand[10].equals("population")) {
+                                    for (int i = 0; i < countries.size(); i++) {
+                                        for (int j = 0; j < countries.get(i).getCities().size(); j++) {
+                                            if (countries.get(i).getCities().get(j) == null) {
+                                                throw new NoCitiesRegistered();
+                                            } else {
+                                                countries.get(i).getCities().sort(Comparator.comparingDouble(City::getPopulation));
+                                                if (countries.get(i).getCities().get(j).getPopulation() == population) {
+                                                    System.out.println(countries.get(i).getCities().get(j).getName() + ", " + countries.get(i).getCities().get(j).getPopulation() + ", " + countries.get(i).getCities().get(j).getId() + ", " + countries.get(i).getCities().get(j).getCountryID());
+                                                }
+                                            }
+                                        }
+                                    }
+                                } else if (splitCommand[10].equals("id")) {
+                                    for (int i = 0; i < countries.size(); i++) {
+                                        for (int j = 0; j < countries.get(i).getCities().size(); j++) {
+                                            if (countries.get(i).getCities().get(j) == null) {
+                                                throw new NoCitiesRegistered();
+                                            } else {
+                                                countries.get(i).getCities().sort(Comparator.comparing(City::getId));
+                                                if (countries.get(i).getCities().get(j).getPopulation() == population) {
+                                                    System.out.println(countries.get(i).getCities().get(j).getName() + ", " + countries.get(i).getCities().get(j).getPopulation() + ", " + countries.get(i).getCities().get(j).getId() + ", " + countries.get(i).getCities().get(j).getCountryID());
+                                                }
+                                            }
+                                        }
+                                    }
+                                } else if (splitCommand[10].equals("countrycode")) {
+                                    for (int i = 0; i < countries.size(); i++) {
+                                        for (int j = 0; j < countries.get(i).getCities().size(); j++) {
+                                            if (countries.get(i).getCities().get(j) == null) {
+                                                throw new NoCitiesRegistered();
+                                            } else {
+                                                countries.get(i).getCities().sort(Comparator.comparing(City::getCountryID));
+                                                if (countries.get(i).getCities().get(j).getPopulation() == population) {
+                                                    System.out.println(countries.get(i).getCities().get(j).getName() + ", " + countries.get(i).getCities().get(j).getPopulation() + ", " + countries.get(i).getCities().get(j).getId() + ", " + countries.get(i).getCities().get(j).getCountryID());
+                                                }
                                             }
                                         }
                                     }
@@ -326,26 +517,7 @@ public class Controller {
                             default:
                                 throw new NoneExistentCommand();
                         }
-
-                        //Collections.sort(countries, (o1, o2) -> {
-                        //    return
-                        //})
-
-                        break;
-                }
-            } else {
-                throw new NoneExistentCommand();
-            }
-        } else {
-            if (command.contains("countries")) {
-                for (int i = 0; i < countries.size(); i++) {
-                    System.out.println(countries.get(i).getName());
-                }
-            } else if (command.contains("cities")) {
-                for (int i = 0; i < countries.size(); i++) {
-                    for (int j = 0; j < countries.get(i).getCities().size(); j++) {
-                        System.out.println(countries.get(i).getCities().get(j).getName());
-                    }
+                   break;
                 }
             }
         }
