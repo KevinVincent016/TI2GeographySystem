@@ -35,6 +35,7 @@ public class Controller {
 
                 Country country = new Country(id, name, population, countryCode);
                 countries.add(country);
+                dataBase.put(countries.indexOf(country),country);
             } else {
                 throw new NoneExistentCommand();
             }
